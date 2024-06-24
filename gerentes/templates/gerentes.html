@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'gerentes/css/gerentes.css' %}">
+{% endblock %}
+
+{% block 'dashboard' %}
+
+<div class="container">
+    <div class="row">
+        <div onclick="exibir_form('1')" class="col-md card-dashboard">
+            <p class="text-card">Colocar dados e registar abastecimentos</p>
+        </div>
+        <div onclick="exibir_form('2')" class="col-md card-dashboard">
+            <p class="text-card">Atualizar dados de registros</p>
+        </div>
+    </div>
+
+    <div class="adicionar_gerente" id="adicionar_gerente">
+        <form action="{% url 'gerentes' %}" method="Post">{% csrf_token %}
+
+            <p>Nome completo:</p>
+            <input type="text" class="form-control"
+                placeholder="Nome completo" name="nome" value="{{nome}}">
+
+            <br>
+            <p>E-mail:</p>
+            <input type="email" class="form-control"
+                placeholder="nome@email.com" name="email" value="{{email}}">
+            <br>
+            <p>CPF:</p>
+            <input type="text" class="form-control" placeholder="___.___.___-__"
+                name="cpf" value="{{cpf}}">
+            <hr style="background-color:gray;">
+            <div class="add-abastecimentos">
+                <h3>Abastecimentos</h3>
+                <span class="btn-add-abastecimentos"
+                    onclick="add_abastecimentos()">+ Adicionar
+                    um abastecimento</span>
+
+                <div id="form-abastecimentos">
+
+                    {% for abastecimento, tanque, bomba, valor, quantidade in Abastecimentos %}
+                    <br>
+                    <div class="row">
+                        <div class="col-md">
+                            <input type='text' placeholder='Abastecimento'
+                                class='form-control' name='abastecimento'
+                                value="{{abastecimento}}">
+                        </div>
+                        <div class="col-md">
+                            <select class='form-control' name='tanque'
+                                value="{{tanque}}">
+                                <option value='gasolina'>Gasolina</option>
+                                <option value='oleo'>Óleo</option>
+                            </select>
+                        </div>
+                        <div class="col-md">
+                                <select class='form-control' name='bomba'  value="{{bomba}}">
+                                <option value='bomba1gasolina'>Bomba01 - Gasolina</option>
+                                <option value='bomba2gasolina'>Bomba02 -Gasolina</option>
+                                <option value='bomba1oleo'>Bomba01 - Óleo</option>
+                                <option value='bomba2oleo'>Bomba02 - Óleo</option>
+                            </select>
+                        </div>
+                        <div class="col-md">
+                            <input type='number' step='0.01' placeholder='Valor'
+                                class='form-control' name='valor'
+                                value="{{valor}}">
+                        </div>
+                        <div class="col-md">
+                            <input type='number' step='0.01' placeholder='Quantidade'
+                                class='form-control' name='quantidade'
+                                value="{{quantidade}}">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <br>
+                <input type="submit" value="Cadastrar" class="btn-principal">
+
+            </div>
+
+            <br>
+
+        </form>
+
+    </div>
+
+
+    <div id="att_gerente"></div>
+
+</div>
+<script src="{% static 'gerentes/js/gerentes.js' %}"></script>
+{% endblock %}
