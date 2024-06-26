@@ -1,7 +1,7 @@
 :root {
-    --main-color: #ff7f50;      /* Coral */
-    --dark-color: #ff4500;      /* Orange Red */
-    --light-color: #ffa07a;     /* Light Salmon */
-    --contrast-color: #ff6347;  /* Tomato */
-    --differential-color: #ffdab9; /* Peach Puff */
+    --main-color: #2c3e50;      /* Azul Escuro */
+    --dark-color: #34495e;      /* Azul Cinza */
+    --light-color: #ecf0f1;     /* Prata */
+    --contrast-color: #e74c3c;  /* Vermelho Coral */
+    --differential-color: #f39c12; /* Laranja */
 }
