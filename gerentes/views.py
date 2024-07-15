@@ -125,13 +125,13 @@ def update_abastecimento(request, id):
 
     return HttpResponse('Método não permitido', status=405)
 
-def update_gerente(request, id):
-    
-        body = json.loads(request.body)
 
-        nome = body['nome']
-        email = body['email']
-        cpf = body['cpf']
+def update_gerente(request, id):
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        nome = body.get('nome')
+        email = body.get('email')
+        cpf = body.get('cpf')
 
         gerente = get_object_or_404(Gerente, id=id)
         try:
@@ -141,7 +141,9 @@ def update_gerente(request, id):
             gerente.save()
             return JsonResponse({'status': '200', 'nome': nome, 'email': email, 'cpf': cpf})
         except Exception as e:
-            return JsonResponse({'status': '500'})
+            return JsonResponse({'status': '500', 'error': str(e)})
+    return JsonResponse({'status': '405', 'error': 'Método não permitido'})
+
 
 def gerar_pdf_abastecimentos(request):
     cpf = request.GET.get('cpf')

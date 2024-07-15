@@ -106,7 +106,7 @@ function dados_gerente() {
 
 function update_gerente() {
   const idGerente = document.getElementById('id').value;
-
+  const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
   const nome = document.getElementById('nome').value;
   const email = document.getElementById('email').value;
   const cpf = document.getElementById('cpf').value;
