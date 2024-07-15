@@ -35,16 +35,16 @@
                     <br>
                     <div class="row">
                         <div class="col-md">
-                            <input type="text" placeholder="Abastecimento" class="form-control" name="abastecimento[]" value="{{ abastecimento.abastecimento }}">
+                            <input type="text" placeholder="Abastecimento" class="form-control" name="abastecimento" value="{{ abastecimento }}">
                         </div>
                         <div class="col-md">
-                            <select class="form-control" name="tanque[]">
+                            <select class="form-control" name="tanque">
                                 <option value="gasolina" {% if abastecimento.tanque == "gasolina" %}selected{% endif %}>Gasolina</option>
                                 <option value="oleo" {% if abastecimento.tanque == "oleo" %}selected{% endif %}>Óleo</option>
                             </select>
                         </div>
                         <div class="col-md">
-                            <select class="form-control" name="bomba[]">
+                            <select class="form-control" name="bomba">
                                 <option value="bomba1gasolina" {% if abastecimento.bomba == "bomba1gasolina" %}selected{% endif %}>Bomba01 - Gasolina</option>
                                 <option value="bomba2gasolina" {% if abastecimento.bomba == "bomba2gasolina" %}selected{% endif %}>Bomba02 - Gasolina</option>
                                 <option value="bomba1oleo" {% if abastecimento.bomba == "bomba1oleo" %}selected{% endif %}>Bomba01 - Óleo</option>
@@ -52,10 +52,10 @@
                             </select>
                         </div>
                         <div class="col-md">
-                            <input type="number" step="0.01" placeholder="Valor" class="form-control" name="valor[]" value="{{ abastecimento.valor }}">
+                            <input type="number" step="0.01" placeholder="Valor" class="form-control" name="valor_unitario" value="{{ valor_unitario }}">
                         </div>
                         <div class="col-md">
-                            <input type="number" step="0.01" placeholder="Quantidade" class="form-control" name="quantidade[]" value="{{ abastecimento.quantidade }}">
+                            <input type="number" step="0.01" placeholder="Quantidade" class="form-control" name="quantidade" value="{{ quantidade }}">
                         </div>
                     </div>
                     {% endfor %}
@@ -93,6 +93,10 @@
             <div id="abastecimentos"></div>
         </div>
     </div>
+    <form method="GET" action="{% url 'gerar_pdf_abastecimentos' %}">
+        <input type="text" name="cpf" placeholder="Digite o CPF" required>
+        <button type="submit">Gerar PDF</button>
+    </form>
 </div>
 <script src="{% static 'gerentes/js/gerentes.js' %}"></script>
 {% endblock %}
